@@ -63,7 +63,7 @@ public class Gragh {
         }
 
 
-        //读取完还要输出邻接表
+        //读取完要输出邻接表
 
     }
 
@@ -169,6 +169,35 @@ public class Gragh {
             e.printStackTrace();
             return ERROR;
         }
+
+        return OK;
+    }
+
+    public int mark_Vex(int position1,int position2){
+
+        vex_Node vex_node = G.get(position1).vex_node;
+
+        while (vex_node!=null){
+            if(vex_node.LinkNum==position2){
+                vex_node.isSave = true;
+                break;
+            }
+            vex_node = vex_node.Next;
+        }
+
+        if(vex_node==null) return ERROR;
+
+        vex_node = G.get(position2).vex_node;
+
+        while (vex_node!=null){
+            if(vex_node.LinkNum==position1){
+                vex_node.isSave = true;
+                break;
+            }
+            vex_node = vex_node.Next;
+        }
+
+        if(vex_node==null) return ERROR;
 
         return OK;
     }

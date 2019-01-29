@@ -23,12 +23,11 @@ public class S_Node {
             vex = vex.Next;
         }
 
-
         vex_Node newNode = new vex_Node();
         newNode.DisTan = diatan;
         newNode.LinkNum = linkNum;
-        newNode.Next = null;
 
+        //newNode.Next = null;
 
         s_node.near = newNode;
         s_node.near = s_node.near.Next;
@@ -60,6 +59,8 @@ public class S_Node {
         vex_node.Next.LinkNum = linkToChange;
         return OK;
     }
+
+
 
 //    public static vex_Node Find_vex(S_Node s_node,int ){
 //
