@@ -17,7 +17,7 @@ public class Gragh {
     }
 
     public void Greate_gragh(String path1,String path2){//读取两个文件
-        try {//读取景点信息
+        try {//path1读取景点信息
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path1));
             int count =Integer.parseInt(bufferedReader.readLine());
 
@@ -42,7 +42,7 @@ public class Gragh {
         }
 
 
-        try {//读取路径信息
+        try {//path2读取路径信息
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path2));
 
             String str;
@@ -136,7 +136,7 @@ public class Gragh {
         }
     }
 
-    public int SaveData(String path,String path2){//保存两个文件
+    public int SaveData(String path,String path2){//保存两个文件,退出之前必须执行
         try {//保存景点信息
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path,true)));
             int count = G.size();
