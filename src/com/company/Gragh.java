@@ -1,9 +1,6 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,8 +16,8 @@ public class Gragh {
         //book = new HashMap<>();
     }
 
-    public void Greate_gragh(String path){
-        try {
+    public void Greate_gragh(String path){//读取两个文件
+        try {//读取景点信息
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             int count =Integer.parseInt(bufferedReader.readLine());
 
@@ -34,6 +31,8 @@ public class Gragh {
                 s_node.near = null;
                 G.put(s_node.num,s_node);
             }
+
+            bufferedReader.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -112,8 +111,29 @@ public class Gragh {
         }
     }
 
-    public int SaveData(){
+    public int SaveData(String path){//保存两个文件
+        try {//保存景点信息
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path,true)));
+            int count = G.size();
+            printWriter.println(count);
 
+            Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+            while (entrys.hasNext()){
+                Map.Entry<Integer,S_Node> entry = entrys.next();                    //
+                //entry.getValue().isVisite = false;
+
+                printWriter.println(entry.getValue().num);
+                printWriter.println(entry.getValue().name);
+                printWriter.println(entry.getValue().inTro);
+
+            }
+
+            printWriter.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return OK;
     }
 
