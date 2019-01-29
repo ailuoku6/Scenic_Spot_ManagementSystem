@@ -42,7 +42,7 @@ public class Gragh {
         }
 
 
-        try {
+        try {//读取路径信息
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path2));
 
             String str;
@@ -162,8 +162,25 @@ public class Gragh {
         }
 
 
-        try {
+        try {//保存路径信息
+
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path2,true)));
+
+            Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+
+            while (entrys.hasNext()){
+                Map.Entry<Integer,S_Node> entry = entrys.next();
+                vex_Node vex_node = entry.getValue().vex_node;
+
+                while (vex_node!=null){
+                    if(!vex_node.isSave){
+                        printWriter.println(entry.getKey()+" "+vex_node.LinkNum+" "+vex_node.DisTan);
+                        mark_Vex(entry.getKey(),vex_node.LinkNum);
+                    }
+                    vex_node = vex_node.Next;
+                }
+
+            }
 
         }catch (IOException e) {
             e.printStackTrace();
@@ -173,7 +190,7 @@ public class Gragh {
         return OK;
     }
 
-    public int mark_Vex(int position1,int position2){
+    public int mark_Vex(int position1,int position2){//标注这里还得能恢复,方便下次保存
 
         vex_Node vex_node = G.get(position1).vex_node;
 
