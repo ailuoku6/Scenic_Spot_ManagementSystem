@@ -1,5 +1,9 @@
 package com.company;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,7 +20,27 @@ public class Gragh {
     }
 
     public void Greate_gragh(String path){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            int count =Integer.parseInt(bufferedReader.readLine());
 
+
+            for (int i = 0;i<count;i++){
+                S_Node s_node = new S_Node();
+                s_node.num = Integer.parseInt(bufferedReader.readLine());
+                s_node.name = bufferedReader.readLine();
+                s_node.inTro = bufferedReader.readLine();
+                s_node.vex_node = null;
+                s_node.near = null;
+                G.put(s_node.num,s_node);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("file not find");
+        }catch (IOException e){
+            System.out.println("file error");
+        }
     }
 
     public int Add_Node(int num,String name,String inTro){
@@ -89,7 +113,7 @@ public class Gragh {
     }
 
     public int SaveData(){
-        
+
         return OK;
     }
 
