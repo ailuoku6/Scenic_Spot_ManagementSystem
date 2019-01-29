@@ -12,18 +12,27 @@ public class S_Node {
     public vex_Node near;
     public boolean isVisite;
 
+    public S_Node(){
+        near = vex_node;
+    }
+
     public static int Addvex(S_Node s_node,int diatan,int linkNum){//增
         vex_Node vex = s_node.vex_node;
-        while (vex!=null){
+        while (vex!=null){//验证是否已存在
             if(vex.LinkNum==linkNum) return ERROR;
             vex = vex.Next;
         }
+
+
         vex_Node newNode = new vex_Node();
         newNode.DisTan = diatan;
         newNode.LinkNum = linkNum;
         newNode.Next = null;
-        s_node.near.Next = newNode;
+
+
         s_node.near = newNode;
+        s_node.near = s_node.near.Next;
+
         return OK;
     }
 

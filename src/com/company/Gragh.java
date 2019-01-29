@@ -16,9 +16,9 @@ public class Gragh {
         //book = new HashMap<>();
     }
 
-    public void Greate_gragh(String path){//读取两个文件
+    public void Greate_gragh(String path1,String path2){//读取两个文件
         try {//读取景点信息
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path1));
             int count =Integer.parseInt(bufferedReader.readLine());
 
 
@@ -40,6 +40,31 @@ public class Gragh {
         }catch (IOException e){
             System.out.println("file error");
         }
+
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path2));
+
+            String str;
+            String[] data;
+
+            while ((str = bufferedReader.readLine())!=null){
+                data = str.split(" ");
+                S_Node.Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+                S_Node.Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
+            }
+
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.out.println("file not find");
+        }catch (IOException e){
+            e.printStackTrace();
+            System.out.println("file error");
+        }
+
+
+        //读取完还要输出邻接表
+
     }
 
     public int Add_Node(int num,String name,String inTro){
@@ -111,7 +136,7 @@ public class Gragh {
         }
     }
 
-    public int SaveData(String path){//保存两个文件
+    public int SaveData(String path,String path2){//保存两个文件
         try {//保存景点信息
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path,true)));
             int count = G.size();
@@ -133,7 +158,18 @@ public class Gragh {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return ERROR;
         }
+
+
+        try {
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path2,true)));
+
+        }catch (IOException e) {
+            e.printStackTrace();
+            return ERROR;
+        }
+
         return OK;
     }
 
