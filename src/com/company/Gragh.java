@@ -82,9 +82,16 @@ public class Gragh {
         return ERROR;
     }
 
-    public int Delete_node(int key){
+    public int Delete_node(int key){//删除一个节点之后,相关的路径也要考虑删除
         if(!G.containsKey(key))return ERROR;
         G.remove(key);
+
+        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+        while (entrys.hasNext()){
+            Map.Entry<Integer,S_Node> entry = entrys.next();
+            delete_vex(entry.getKey(),key);
+        }
+
         return OK;
     }
 
@@ -127,8 +134,9 @@ public class Gragh {
         }
     }
 
-    public void S_node_Detail(int key){
+    public int S_node_Detail(int key){
         S_Node s_node = G.get(key);
+        if(s_node==null) return ERROR;
         System.out.println(s_node.name);
         System.out.println(s_node.inTro);
         vex_Node vex_node = s_node.vex_node;
@@ -137,6 +145,7 @@ public class Gragh {
             System.out.println(vex_node.DisTan);
             vex_node = vex_node.Next;
         }
+        return OK;
     }
 
     public int SaveData(String path,String path2){//保存两个文件,退出之前必须执行,保存之前清空原有数据
@@ -253,6 +262,9 @@ public class Gragh {
 
     public int delete_vex(int key,int linkTo){//删
         S_Node s_node = G.get(key);
+
+        if(s_node==null) return ERROR;
+
         vex_Node deletenode;
         vex_Node vex = s_node.vex_node;
         if(vex==null) return ERROR;
@@ -275,14 +287,29 @@ public class Gragh {
         return OK;
     }
 
-    public int Change_vex(S_Node s_node,int linkTo,int linkToChange){//改
-        vex_Node vex_node = s_node.vex_node;
-        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
-            vex_node = vex_node.Next;
+    public int Change_vex(int Old_p1,int Old_p2,int newp1,int newp2,int newDistan){//改
+//        S_Node s_node = G.get(key);
+//        vex_Node vex_node = s_node.vex_node;
+//        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
+//            vex_node = vex_node.Next;
+//        }
+//        if(vex_node.Next==null) return ERROR;
+//        vex_node.Next.LinkNum = linkToChange;
+
+        if(delete_vex(Old_p1,Old_p2)==OK&&
+                delete_vex(Old_p2,Old_p1)==OK&&
+                Addvex(newp1,newp2,newDistan)==OK&&
+                Addvex(newp2,newp1,newDistan)==OK) {
+            return OK;
         }
-        if(vex_node.Next==null) return ERROR;
-        vex_node.Next.LinkNum = linkToChange;
-        return OK;
+
+//        delete_vex(Old_p1,Old_p2);
+//        delete_vex(Old_p2,Old_p1);
+//
+//        Addvex(newp1,newp2,newDistan);
+//        Addvex(newp2,newp1,newDistan);
+
+        return ERROR;
     }
 
 }

@@ -42,7 +42,7 @@ public class Main {
                 case 'b'://查询景点
                 case 'B':Scenic_detail(gragh,scanner);
                     break;
-                case 'c'://景点导航
+                case 'c'://景点导航,待完善
                 case 'C':Scenic_nav(gragh,scanner);
                     break;
                 case 'd'://搜索最短路径
@@ -73,7 +73,9 @@ public class Main {
     public static void Scenic_detail(Gragh gragh,Scanner sc){
         //Scanner sc = new Scanner(System.in);
         System.out.print("please enter scenic num:");
-        gragh.S_node_Detail(sc.nextInt());
+        if(gragh.S_node_Detail(sc.nextInt())==ERROR){
+            System.out.println("没有此景点!");
+        }
         //sc.close();
     }
 
@@ -117,6 +119,9 @@ public class Main {
         }
 
     }
+
+
+
 
     public static void AddScenic(Gragh gragh,Scanner scanner){
         int num;
@@ -188,7 +193,17 @@ public class Main {
     }
 
     public static void ChangePath(Gragh gragh,Scanner scanner){
-
+        int Old_p1,Old_p2,newP1,newp2,newDistan;
+        System.out.print("enter old_p1 and old_p2:");
+        Old_p1 = scanner.nextInt();
+        Old_p2 = scanner.nextInt();
+        System.out.print("enter newp1 and newp2 and newdistan:");
+        newP1 = scanner.nextInt();
+        newp2 = scanner.nextInt();
+        newDistan = scanner.nextInt();
+        if(gragh.Change_vex(Old_p1,Old_p2,newP1,newp2,newDistan)==OK){
+            System.out.println("修改成功!");
+        }else System.out.println("修改失败!");
     }
 
 }

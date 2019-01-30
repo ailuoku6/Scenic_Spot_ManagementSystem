@@ -23,6 +23,7 @@ public class Menu {
     public static void ShowSubMenu(){
         //插入、删除、修改顶点、边的信息，注意顶点和边的关系，之后保存文件，重新读取文件建立图的存储结构并显示。
         //重点注意顶点和边的关系，考虑边是否重复？顶点是否存在？……
+        //完善程序的健壮性
         System.out.println("-----------------------------------------------------");
         System.out.println("|                     A:增加景点                     |");
         System.out.println("|                     B:删除景点                     |");
