@@ -52,8 +52,8 @@ public class Gragh {
                 data = str.split(" ");
 //                S_Node.Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
 //                S_Node.Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
-                Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
-                Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
+                Addvex(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+                Addvex(Integer.parseInt(data[1]),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
             }
 
         }catch (FileNotFoundException e){
@@ -91,6 +91,7 @@ public class Gragh {
     public int Change_Node(int key,String name,String inTro){
         if(!G.containsKey(key)) return ERROR;
         S_Node s_node = G.get(key);
+        //s_node.num = num;
         s_node.name = name;
         s_node.inTro = inTro;
         return OK;
@@ -223,7 +224,9 @@ public class Gragh {
         return OK;
     }
 
-    public int Addvex(S_Node s_node,int linkNum,int diatan){//增
+    public int Addvex(int key,int linkNum,int diatan){//增
+
+        S_Node s_node = G.get(key);
 
         vex_Node newNode = new vex_Node();
         newNode.DisTan = diatan;
@@ -248,17 +251,25 @@ public class Gragh {
         return OK;
     }
 
-    public int delete_vex(S_Node s_node,int linkTo){//删
+    public int delete_vex(int key,int linkTo){//删
+        S_Node s_node = G.get(key);
+        vex_Node deletenode;
         vex_Node vex = s_node.vex_node;
         if(vex==null) return ERROR;
 
         //删除结点为第一个结点的情况
+        if(vex.LinkNum==linkTo){
+            deletenode = vex;
+            s_node.vex_node = s_node.vex_node.Next;
+            deletenode = null;
+            return OK;
+        }
 
         while (vex.Next!=null&&vex.Next.LinkNum!=linkTo){
             vex = vex.Next;
         }
         if(vex.Next==null) return ERROR;
-        vex_Node deletenode = vex.Next;
+        deletenode = vex.Next;
         vex.Next = deletenode.Next;
         deletenode = null;
         return OK;

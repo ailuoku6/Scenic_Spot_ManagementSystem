@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static final int OK = 1;
+    public static final int ERROR = 0;
+
     public static void main(String[] args) {
 	// write your code here
 //        vex_Node vex_node = new vex_Node();
@@ -88,19 +91,19 @@ public class Main {
             System.out.print("please enter a option:");
             switch (scanner.next().charAt(0)){
                 case 'a'://增加景点
-                case 'A':
+                case 'A':AddScenic(gragh,scanner);
                     break;
                 case 'b'://删除景点
-                case 'B':
+                case 'B':DeleteScenic(gragh,scanner);
                     break;
                 case 'c'://修改景点
-                case 'C':
+                case 'C':ChangeScenic(gragh,scanner);
                     break;
                 case 'd'://增加路径
-                case 'D':
+                case 'D':Addpath(gragh,scanner);
                     break;
                 case 'e'://删除路径
-                case 'E':
+                case 'E':DeletePath(gragh,scanner);
                     break;
                 case 'f'://修改路径
                 case 'F':
@@ -112,6 +115,79 @@ public class Main {
                     break;
             }
         }
+
+    }
+
+    public static void AddScenic(Gragh gragh,Scanner scanner){
+        int num;
+        String name;
+        String inTro;
+        System.out.print("please enter num:");
+        num = scanner.nextInt();
+        System.out.print("please enter name:");
+        name = scanner.next();
+        System.out.print("please enter inTro:");
+        inTro = scanner.next();
+
+        if(gragh.Add_Node(num,name,inTro)==OK){
+            System.out.println("增加完毕!");
+        }else {
+            System.out.println("该景点已存在!");
+        }
+
+    }
+
+    public static void DeleteScenic(Gragh gragh,Scanner scanner){
+        int num;
+        System.out.print("please enter num:");
+        num = scanner.nextInt();
+        if (gragh.Delete_node(num)==OK){
+            System.out.println("删除成功!");
+        }else {
+            System.out.println("无此景点!");
+        }
+    }
+
+    public static void ChangeScenic(Gragh gragh,Scanner scanner){
+        int num;
+        String name;
+        String inTro;
+        System.out.print("please enter num:");
+        num = scanner.nextInt();
+        System.out.print("please enter name:");
+        name = scanner.next();
+        System.out.print("please enter inTro:");
+        inTro = scanner.next();
+        if(gragh.Change_Node(num,name,inTro)==OK){
+            System.out.println("修改成功!");
+        }else System.out.println("无此景点!");
+    }
+
+    public static void Addpath(Gragh gragh,Scanner scanner){
+        int point1,point2,distan;
+        System.out.print("please enter point1:");
+        point1 = scanner.nextInt();
+        System.out.print("please enter point2:");
+        point2 = scanner.nextInt();
+        System.out.print("please enter distan:");
+        distan = scanner.nextInt();
+        if(gragh.Addvex(point1,point2,distan)==OK&&gragh.Addvex(point2,point1,distan)==OK){
+            System.out.println("添加路径成功!");
+        }else System.out.println("添加路径失败!");
+    }
+
+    public static void DeletePath(Gragh gragh,Scanner scanner){
+        int point1,point2;
+        System.out.print("please enter point1:");
+        point1 = scanner.nextInt();
+        System.out.print("please enter point2:");
+        point2 = scanner.nextInt();
+        if(gragh.delete_vex(point1,point2)==OK&&gragh.delete_vex(point2,point1)==OK){
+            System.out.println("删除路径成功!");
+        }else System.out.println("删除路径失败!");
+    }
+
+    public static void ChangePath(Gragh gragh,Scanner scanner){
 
     }
 
