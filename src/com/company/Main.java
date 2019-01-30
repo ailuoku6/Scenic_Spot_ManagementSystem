@@ -49,7 +49,7 @@ public class Main {
                 case 'E':
                     break;
                 case 'f'://修改图保存文件
-                case 'F':gragh.SaveData("Vex.txt","Edge.txt");
+                case 'F':Change_Gragh(gragh,scanner);
                     break;
                 case 'g'://退出程序
                 case 'G':isRun = false;
@@ -82,6 +82,36 @@ public class Main {
     }
 
     public static void Change_Gragh(Gragh gragh,Scanner scanner){
+        boolean isRun = true;
+        while (isRun){
+            Menu.ShowSubMenu();
+            System.out.print("please enter a option:");
+            switch (scanner.next().charAt(0)){
+                case 'a'://增加景点
+                case 'A':
+                    break;
+                case 'b'://删除景点
+                case 'B':
+                    break;
+                case 'c'://修改景点
+                case 'C':
+                    break;
+                case 'd'://增加路径
+                case 'D':
+                    break;
+                case 'e'://删除路径
+                case 'E':
+                    break;
+                case 'f'://修改路径
+                case 'F':
+                    break;
+                case 'g'://退出
+                case 'G':isRun = false;
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 

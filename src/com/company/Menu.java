@@ -24,13 +24,13 @@ public class Menu {
         //插入、删除、修改顶点、边的信息，注意顶点和边的关系，之后保存文件，重新读取文件建立图的存储结构并显示。
         //重点注意顶点和边的关系，考虑边是否重复？顶点是否存在？……
         System.out.println("-----------------------------------------------------");
-        System.out.println("                          A:                           ");
-        System.out.println("                          B:                           ");
-        System.out.println("                          C:                           ");
-        System.out.println("                          D:                           ");
-        System.out.println("                          E:                           ");
-        System.out.println("                          F:                           ");
-        System.out.println("                          G:                           ");
+        System.out.println("|                     A:增加景点                     |");
+        System.out.println("|                     B:删除景点                     |");
+        System.out.println("|                     C:修改景点                     |");
+        System.out.println("|                     D:增加路径                     |");
+        System.out.println("|                     E:删除路径                     |");
+        System.out.println("|                     F:修改路径                     |");
+        System.out.println("|                      G:退出                       |");
 
         System.out.println("-----------------------------------------------------");
 
