@@ -138,7 +138,7 @@ public class Gragh {
         }
     }
 
-    public int SaveData(String path,String path2){//保存两个文件,退出之前必须执行
+    public int SaveData(String path,String path2){//保存两个文件,退出之前必须执行,保存之前清空原有数据
         try {//保存景点信息
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path,true)));
             int count = G.size();
@@ -184,6 +184,8 @@ public class Gragh {
 
             }
 
+            printWriter.close();
+
         }catch (IOException e) {
             e.printStackTrace();
             return ERROR;
@@ -223,14 +225,6 @@ public class Gragh {
 
     public int Addvex(S_Node s_node,int linkNum,int diatan){//增
 
-
-//        while (vex!=null&&vex.Next!=null){//验证是否已存在
-//            if(vex.LinkNum==linkNum) return ERROR;
-//            vex = vex.Next;
-//        }
-//
-//        if(vex.LinkNum==linkNum) return ERROR;
-
         vex_Node newNode = new vex_Node();
         newNode.DisTan = diatan;
         newNode.LinkNum = linkNum;
@@ -242,26 +236,41 @@ public class Gragh {
 
         vex_Node vex = s_node.vex_node;
 
-        while (vex!=null&&vex.Next!=null){//验证是否已存在
+        while (vex!=null&&vex.Next!=null){//验证路径是否已存在
             if(vex.LinkNum==linkNum) return ERROR;
             vex = vex.Next;
         }
 
-        if(vex.LinkNum==linkNum) return ERROR;
-
+        if(vex.LinkNum==linkNum) return ERROR;//验证最后一个路径是否重复
 
         vex.Next = newNode;
 
-        //newNode.Next = null;
+        return OK;
+    }
 
-//        s_node.near = newNode;
-//
-//        if(s_node.vex_node==null) s_node.vex_node = s_node.near;
-//
-//        s_node.near = s_node.vex_node.Next;
+    public int delete_vex(S_Node s_node,int linkTo){//删
+        vex_Node vex = s_node.vex_node;
+        if(vex==null) return ERROR;
 
-        //vex = newNode;
+        //删除结点为第一个结点的情况
 
+        while (vex.Next!=null&&vex.Next.LinkNum!=linkTo){
+            vex = vex.Next;
+        }
+        if(vex.Next==null) return ERROR;
+        vex_Node deletenode = vex.Next;
+        vex.Next = deletenode.Next;
+        deletenode = null;
+        return OK;
+    }
+
+    public int Change_vex(S_Node s_node,int linkTo,int linkToChange){//改
+        vex_Node vex_node = s_node.vex_node;
+        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
+            vex_node = vex_node.Next;
+        }
+        if(vex_node.Next==null) return ERROR;
+        vex_node.Next.LinkNum = linkToChange;
         return OK;
     }
 

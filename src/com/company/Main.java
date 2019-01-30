@@ -29,7 +29,7 @@ public class Main {
         boolean isRun = true;
 
         while (isRun){
-            ShowMenu();
+            Menu.ShowMenu();
             System.out.print("输入需要操作的选项:");
             option = scanner.next().charAt(0);
             switch (option){
@@ -67,24 +67,6 @@ public class Main {
     }
 
 
-    public static void ShowMenu(){
-        System.out.println("-----------------------------------------------------");
-        System.out.println("|                      A:读取地图                    |");
-        System.out.println("|                      B:查询景点                    |");
-        System.out.println("|                      C:景点导航                    |");
-        System.out.println("|                     D:搜索最短路径                  |");
-        System.out.println("|                     E:铺设电路规划                  |");
-
-
-        System.out.println("|                    F:修改图保存文件                 |");
-        //插入、删除、修改顶点、边的信息，注意顶点和边的关系，之后保存文件，重新读取文件建立图的存储结构并显示。
-        //重点注意顶点和边的关系，考虑边是否重复？顶点是否存在？……
-
-        System.out.println("|                      G:退出程序                    |");
-        System.out.println("-----------------------------------------------------");
-
-    }
-
     public static void Scenic_detail(Gragh gragh,Scanner sc){
         //Scanner sc = new Scanner(System.in);
         System.out.print("please enter scenic num:");
@@ -97,6 +79,10 @@ public class Main {
         System.out.print("please enter start point");
         gragh.DFS_Init(scanner.nextInt());
         //scanner.close();
+    }
+
+    public static void Change_Gragh(Gragh gragh,Scanner scanner){
+
     }
 
 }

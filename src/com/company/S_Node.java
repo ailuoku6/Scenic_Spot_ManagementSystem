@@ -37,28 +37,28 @@ public class S_Node {
 
     //对象置为null时，虚拟机视其为可回收
 
-    public static int delete_vex(S_Node s_node,int linkTo){//删
-        vex_Node vex = s_node.vex_node;
-        if(vex==null) return ERROR;
-        while (vex.Next!=null&&vex.Next.LinkNum!=linkTo){
-            vex = vex.Next;
-        }
-        if(vex.Next==null) return ERROR;
-        vex_Node deletenode = vex.Next;
-        vex.Next = deletenode.Next;
-        deletenode = null;
-        return OK;
-    }
-
-    public static int Change_vex(S_Node s_node,int linkTo,int linkToChange){
-        vex_Node vex_node = s_node.vex_node;
-        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
-            vex_node = vex_node.Next;
-        }
-        if(vex_node.Next==null) return ERROR;
-        vex_node.Next.LinkNum = linkToChange;
-        return OK;
-    }
+//    public static int delete_vex(S_Node s_node,int linkTo){//删
+//        vex_Node vex = s_node.vex_node;
+//        if(vex==null) return ERROR;
+//        while (vex.Next!=null&&vex.Next.LinkNum!=linkTo){
+//            vex = vex.Next;
+//        }
+//        if(vex.Next==null) return ERROR;
+//        vex_Node deletenode = vex.Next;
+//        vex.Next = deletenode.Next;
+//        deletenode = null;
+//        return OK;
+//    }
+//
+//    public static int Change_vex(S_Node s_node,int linkTo,int linkToChange){
+//        vex_Node vex_node = s_node.vex_node;
+//        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
+//            vex_node = vex_node.Next;
+//        }
+//        if(vex_node.Next==null) return ERROR;
+//        vex_node.Next.LinkNum = linkToChange;
+//        return OK;
+//    }
 
 
 
