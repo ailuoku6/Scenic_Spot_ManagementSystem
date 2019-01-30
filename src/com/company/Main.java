@@ -108,10 +108,13 @@ public class Main {
                 case 'E':DeletePath(gragh,scanner);
                     break;
                 case 'f'://修改路径
-                case 'F':
+                case 'F':ChangePath(gragh,scanner);
                     break;
-                case 'g'://退出
-                case 'G':isRun = false;
+                case 'g'://保存
+                case 'G':gragh.SaveData("Vex.txt","Edge.txt");
+                    break;
+                case 'h'://退出
+                case 'H':isRun = false;
                     break;
                 default:
                     break;

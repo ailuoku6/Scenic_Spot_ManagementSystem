@@ -148,9 +148,9 @@ public class Gragh {
         return OK;
     }
 
-    public int SaveData(String path,String path2){//保存两个文件,退出之前必须执行,保存之前清空原有数据
+    public int SaveData(String path,String path2){//保存两个文件
         try {//保存景点信息
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path,true)));
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path)));
             int count = G.size();
             printWriter.println(count);
 
@@ -176,7 +176,7 @@ public class Gragh {
 
         try {//保存路径信息
 
-            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path2,true)));
+            PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path2)));
 
             Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
 
@@ -185,7 +185,7 @@ public class Gragh {
                 vex_Node vex_node = entry.getValue().vex_node;
 
                 while (vex_node!=null){
-                    if(!vex_node.isSave){
+                    if(!vex_node.isSave){//函数结束后，isSave必须还原
                         printWriter.println(entry.getKey()+" "+vex_node.LinkNum+" "+vex_node.DisTan);
                         mark_Vex(entry.getKey(),vex_node.LinkNum);
                     }
@@ -200,6 +200,8 @@ public class Gragh {
             e.printStackTrace();
             return ERROR;
         }
+
+        Recover_Vexmark();//还原isSave标记
 
         return OK;
     }
@@ -232,6 +234,20 @@ public class Gragh {
 
         return OK;
     }
+
+
+    public void Recover_Vexmark(){
+        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+        while (entrys.hasNext()){
+            Map.Entry<Integer,S_Node> entry = entrys.next();
+            vex_Node vex_node = entry.getValue().vex_node;
+            while (vex_node!=null){
+                vex_node.isSave = false;
+                vex_node = vex_node.Next;
+            }
+        }
+    }
+
 
     public int Addvex(int key,int linkNum,int diatan){//增
 

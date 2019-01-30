@@ -31,8 +31,9 @@ public class Menu {
         System.out.println("|                     D:增加路径                     |");
         System.out.println("|                     E:删除路径                     |");
         System.out.println("|                     F:修改路径                     |");
-        System.out.println("|                      G:退出                       |");
+        System.out.println("|                     G:保存地图                     |");
 
+        System.out.println("|                      H:退出                       |");
         System.out.println("-----------------------------------------------------");
 
     }
