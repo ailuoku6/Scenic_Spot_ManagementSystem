@@ -37,10 +37,10 @@ public class Main {
                 case 'A':gragh.Greate_gragh("Vex.txt","Edge.txt");
                     break;
                 case 'b'://查询景点
-                case 'B':Scenic_detail(gragh);
+                case 'B':Scenic_detail(gragh,scanner);
                     break;
                 case 'c'://景点导航
-                case 'C':Scenic_nav(gragh);
+                case 'C':Scenic_nav(gragh,scanner);
                     break;
                 case 'd'://搜索最短路径
                 case 'D':
@@ -85,18 +85,18 @@ public class Main {
 
     }
 
-    public static void Scenic_detail(Gragh gragh){
-        Scanner scanner = new Scanner(System.in);
+    public static void Scenic_detail(Gragh gragh,Scanner sc){
+        //Scanner sc = new Scanner(System.in);
         System.out.print("please enter scenic num:");
-        gragh.S_node_Detail(scanner.nextInt());
-        scanner.close();
+        gragh.S_node_Detail(sc.nextInt());
+        //sc.close();
     }
 
-    public static void Scenic_nav(Gragh gragh){
-        Scanner scanner = new Scanner(System.in);
+    public static void Scenic_nav(Gragh gragh,Scanner scanner){
+        //Scanner scanner = new Scanner(System.in);
         System.out.print("please enter start point");
         gragh.DFS_Init(scanner.nextInt());
-        scanner.close();
+        //scanner.close();
     }
 
 }

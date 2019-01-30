@@ -50,8 +50,10 @@ public class Gragh {
 
             while ((str = bufferedReader.readLine())!=null){
                 data = str.split(" ");
-                S_Node.Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
-                S_Node.Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
+//                S_Node.Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+//                S_Node.Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
+                Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+                Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
             }
 
         }catch (FileNotFoundException e){
@@ -215,6 +217,50 @@ public class Gragh {
         }
 
         if(vex_node==null) return ERROR;
+
+        return OK;
+    }
+
+    public int Addvex(S_Node s_node,int linkNum,int diatan){//增
+
+
+//        while (vex!=null&&vex.Next!=null){//验证是否已存在
+//            if(vex.LinkNum==linkNum) return ERROR;
+//            vex = vex.Next;
+//        }
+//
+//        if(vex.LinkNum==linkNum) return ERROR;
+
+        vex_Node newNode = new vex_Node();
+        newNode.DisTan = diatan;
+        newNode.LinkNum = linkNum;
+
+        if(s_node.vex_node==null) {
+            s_node.vex_node = newNode;
+            return OK;
+        }
+
+        vex_Node vex = s_node.vex_node;
+
+        while (vex!=null&&vex.Next!=null){//验证是否已存在
+            if(vex.LinkNum==linkNum) return ERROR;
+            vex = vex.Next;
+        }
+
+        if(vex.LinkNum==linkNum) return ERROR;
+
+
+        vex.Next = newNode;
+
+        //newNode.Next = null;
+
+//        s_node.near = newNode;
+//
+//        if(s_node.vex_node==null) s_node.vex_node = s_node.near;
+//
+//        s_node.near = s_node.vex_node.Next;
+
+        //vex = newNode;
 
         return OK;
     }
