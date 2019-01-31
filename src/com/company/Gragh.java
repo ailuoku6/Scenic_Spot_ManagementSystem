@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Gragh {
-    public Map<Integer,S_Node> G;
+    public Map<Integer,S_Node> G;//地图存于map中
     //public Map<Integer,Boolean> book;
     public final int OK = 1;
     public final int ERROR = 0;
@@ -253,6 +253,8 @@ public class Gragh {
 
         S_Node s_node = G.get(key);
 
+        if (s_node==null||G.get(linkNum)==null) return ERROR;//找不到对应结点
+
         vex_Node newNode = new vex_Node();
         newNode.DisTan = diatan;
         newNode.LinkNum = linkNum;
@@ -264,7 +266,11 @@ public class Gragh {
 
         vex_Node vex = s_node.vex_node;
 
-        while (vex!=null&&vex.Next!=null){//验证路径是否已存在
+//        while (vex!=null&&vex.Next!=null){//验证路径是否已存在
+//            if(vex.LinkNum==linkNum) return ERROR;
+//            vex = vex.Next;
+//        }
+        while (vex.Next!=null){//验证路径是否已存在
             if(vex.LinkNum==linkNum) return ERROR;
             vex = vex.Next;
         }
@@ -282,6 +288,7 @@ public class Gragh {
         if(s_node==null) return ERROR;
 
         vex_Node deletenode;
+
         vex_Node vex = s_node.vex_node;
         if(vex==null) return ERROR;
 
@@ -296,7 +303,10 @@ public class Gragh {
         while (vex.Next!=null&&vex.Next.LinkNum!=linkTo){
             vex = vex.Next;
         }
+
+        //没有找到相应的路径
         if(vex.Next==null) return ERROR;
+
         deletenode = vex.Next;
         vex.Next = deletenode.Next;
         deletenode = null;

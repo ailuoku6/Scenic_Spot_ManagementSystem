@@ -37,7 +37,7 @@ public class Main {
             option = scanner.next().charAt(0);
             switch (option){
                 case 'a'://读取地图
-                case 'A':gragh.Greate_gragh("Vex.txt","Edge.txt");
+                case 'A':gragh.Greate_gragh(Filepath.scenic_path,Filepath.Road_path);
                     break;
                 case 'b'://查询景点
                 case 'B':Scenic_detail(gragh,scanner);
@@ -46,10 +46,10 @@ public class Main {
                 case 'C':Scenic_nav(gragh,scanner);
                     break;
                 case 'd'://搜索最短路径
-                case 'D':
+                case 'D':Shortest_Path(gragh,scanner);
                     break;
                 case 'e'://铺设电路规划
-                case 'E':
+                case 'E':Circuit_planning(gragh,scanner);
                     break;
                 case 'f'://修改图保存文件
                 case 'F':Change_Gragh(gragh,scanner);
@@ -86,6 +86,14 @@ public class Main {
         //scanner.close();
     }
 
+    public static void Shortest_Path(Gragh gragh,Scanner scanner){
+
+    }
+
+    public static void Circuit_planning(Gragh gragh,Scanner scanner){
+
+    }
+
     public static void Change_Gragh(Gragh gragh,Scanner scanner){
         boolean isRun = true;
         while (isRun){
@@ -111,7 +119,7 @@ public class Main {
                 case 'F':ChangePath(gragh,scanner);
                     break;
                 case 'g'://保存
-                case 'G':gragh.SaveData("Vex.txt","Edge.txt");
+                case 'G':gragh.SaveData(Filepath.scenic_path,Filepath.Road_path);
                     break;
                 case 'h'://退出
                 case 'H':isRun = false;
