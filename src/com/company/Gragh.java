@@ -3,6 +3,7 @@ package com.company;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Gragh {
@@ -10,6 +11,7 @@ public class Gragh {
     //public Map<Integer,Boolean> book;
     public final int OK = 1;
     public final int ERROR = 0;
+    public final int INF = 999999999;
 
     public Gragh(){
         G = new HashMap<>();
@@ -336,6 +338,40 @@ public class Gragh {
 //        Addvex(newp2,newp1,newDistan);
 
         return ERROR;
+    }
+
+    public int Get_distan(int p1,int p2){
+        S_Node s_node = G.get(p1);
+        if(s_node!=null){
+            vex_Node vex_node = s_node.vex_node;
+            while (vex_node!=null){
+                if(vex_node.LinkNum==p2) return vex_node.DisTan;
+                vex_node = vex_node.Next;
+            }
+        }
+        return INF;
+    }
+
+    public int Find_short_path(int p1,int p2){
+        if(G.get(p1)==null||G.get(p2)==null) return ERROR;
+
+        Map<Integer,Integer> dis_known = new LinkedHashMap<>();//已知最短路径顶点集合
+        Map<Integer,Integer> Unknown = new LinkedHashMap<>();//未知最短路径顶点集合
+
+        dis_known.put(p1,0);
+
+        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+
+        while (entrys.hasNext()){
+            Map.Entry<Integer,S_Node> entry = entrys.next();
+            if(entry.getKey()!=p1){
+                Unknown.put(entry.getKey(),Get_distan(p1,entry.getKey()));
+            }
+        }
+
+        
+
+        return OK;
     }
 
 }

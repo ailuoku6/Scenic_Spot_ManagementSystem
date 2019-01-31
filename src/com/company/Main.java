@@ -87,7 +87,14 @@ public class Main {
     }
 
     public static void Shortest_Path(Gragh gragh,Scanner scanner){
-
+        int p1,p2;
+        System.out.print("enter p1:");
+        p1 = scanner.nextInt();
+        System.out.print("enter p2:");
+        p2 = scanner.nextInt();
+        if (gragh.Find_short_path(p1,p2)!=OK){
+            System.out.println("景点不存在!");
+        }
     }
 
     public static void Circuit_planning(Gragh gragh,Scanner scanner){
