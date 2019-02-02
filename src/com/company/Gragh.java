@@ -150,11 +150,13 @@ public class Gragh {
         S_Node s_node = G.get(key);
         if(s_node==null) return ERROR;
         System.out.println(s_node.name);
-        System.out.println(s_node.inTro);
+        System.out.println("简介:"+s_node.inTro);
+        System.out.println("附近的景点有:");
         vex_Node vex_node = s_node.vex_node;
         while (vex_node!=null){
-            System.out.println(G.get(vex_node.LinkNum).name);
-            System.out.println(vex_node.DisTan);
+//            System.out.println(G.get(vex_node.LinkNum).name);
+//            System.out.println(vex_node.DisTan);
+            System.out.println(G.get(vex_node.LinkNum).name+",距"+s_node.name+vex_node.DisTan);
             vex_node = vex_node.Next;
         }
         return OK;
@@ -326,13 +328,6 @@ public class Gragh {
     }
 
     public int Change_vex(int Old_p1,int Old_p2,int newp1,int newp2,int newDistan){//改
-//        S_Node s_node = G.get(key);
-//        vex_Node vex_node = s_node.vex_node;
-//        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
-//            vex_node = vex_node.Next;
-//        }
-//        if(vex_node.Next==null) return ERROR;
-//        vex_node.Next.LinkNum = linkToChange;
 
         if(delete_vex(Old_p1,Old_p2)==OK&&
                 delete_vex(Old_p2,Old_p1)==OK&&
@@ -340,12 +335,6 @@ public class Gragh {
                 Addvex(newp2,newp1,newDistan)==OK) {
             return OK;
         }
-
-//        delete_vex(Old_p1,Old_p2);
-//        delete_vex(Old_p2,Old_p1);
-//
-//        Addvex(newp1,newp2,newDistan);
-//        Addvex(newp2,newp1,newDistan);
 
         return ERROR;
     }
@@ -403,7 +392,7 @@ public class Gragh {
             }
         }
 
-        System.out.println(G.get(p2).minDistan);
+        System.out.println("最短距离为"+G.get(p2).minDistan);
 
         LinkedList<Integer> path = Path.get(p2);
 

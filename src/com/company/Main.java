@@ -58,7 +58,7 @@ public class Main {
 
     public static void Scenic_detail(Gragh gragh,Scanner sc){
         //Scanner sc = new Scanner(System.in);
-        System.out.print("please enter scenic num:");
+        System.out.print("请输入景点编号:");
         if(gragh.S_node_Detail(sc.nextInt())==ERROR){
             System.out.println("没有此景点!");
         }
@@ -67,16 +67,16 @@ public class Main {
 
     public static void Scenic_nav(Gragh gragh,Scanner scanner){
         //Scanner scanner = new Scanner(System.in);
-        System.out.print("please enter start point");
+        System.out.print("请输入你所在的景点编号:");
         gragh.DFS_Init(scanner.nextInt());
         //scanner.close();
     }
 
     public static void Shortest_Path(Gragh gragh,Scanner scanner){
         int p1,p2;
-        System.out.print("enter p1:");
+        System.out.print("输入你所在的景点编号:");
         p1 = scanner.nextInt();
-        System.out.print("enter p2:");
+        System.out.print("输入目标景点编号:");
         p2 = scanner.nextInt();
         if (gragh.Find_short_path(p1,p2)!=OK){
             System.out.println("景点不存在!");
@@ -131,11 +131,11 @@ public class Main {
         int num;
         String name;
         String inTro;
-        System.out.print("please enter num:");
+        System.out.print("输入要增加的景点编号:");
         num = scanner.nextInt();
-        System.out.print("please enter name:");
+        System.out.print("输入要增加的景点名称:");
         name = scanner.next();
-        System.out.print("please enter inTro:");
+        System.out.print("输入要增加的景点简介:");
         inTro = scanner.next();
 
         if(gragh.Add_Node(num,name,inTro)==OK){
@@ -148,7 +148,7 @@ public class Main {
 
     public static void DeleteScenic(Gragh gragh,Scanner scanner){
         int num;
-        System.out.print("please enter num:");
+        System.out.print("输入要删除的景点编号:");
         num = scanner.nextInt();
         if (gragh.Delete_node(num)==OK){
             System.out.println("删除成功!");
@@ -161,11 +161,11 @@ public class Main {
         int num;
         String name;
         String inTro;
-        System.out.print("please enter num:");
+        System.out.print("输入要修改的景点编号:");
         num = scanner.nextInt();
-        System.out.print("please enter name:");
+        System.out.print("输入要修改的景点名称:");
         name = scanner.next();
-        System.out.print("please enter inTro:");
+        System.out.print("输入要修改的景点简介:");
         inTro = scanner.next();
         if(gragh.Change_Node(num,name,inTro)==OK){
             System.out.println("修改成功!");
@@ -174,11 +174,11 @@ public class Main {
 
     public static void Addpath(Gragh gragh,Scanner scanner){
         int point1,point2,distan;
-        System.out.print("please enter point1:");
+        System.out.print("输入要增加的路径的起始端:");
         point1 = scanner.nextInt();
-        System.out.print("please enter point2:");
+        System.out.print("输入要增加的路径的到达端:");
         point2 = scanner.nextInt();
-        System.out.print("please enter distan:");
+        System.out.print("输入要增加的路径的长度:");
         distan = scanner.nextInt();
         if(gragh.Addvex(point1,point2,distan)==OK&&gragh.Addvex(point2,point1,distan)==OK){
             System.out.println("添加路径成功!");
@@ -187,9 +187,9 @@ public class Main {
 
     public static void DeletePath(Gragh gragh,Scanner scanner){
         int point1,point2;
-        System.out.print("please enter point1:");
+        System.out.print("输入要删除的路径的起始端:");
         point1 = scanner.nextInt();
-        System.out.print("please enter point2:");
+        System.out.print("输入要删除的路径的到达端:");
         point2 = scanner.nextInt();
         if(gragh.delete_vex(point1,point2)==OK&&gragh.delete_vex(point2,point1)==OK){
             System.out.println("删除路径成功!");
@@ -198,10 +198,10 @@ public class Main {
 
     public static void ChangePath(Gragh gragh,Scanner scanner){
         int Old_p1,Old_p2,newP1,newp2,newDistan;
-        System.out.print("enter old_p1 and old_p2:");
+        System.out.print("输入旧路径的起始端和到达端:");
         Old_p1 = scanner.nextInt();
         Old_p2 = scanner.nextInt();
-        System.out.print("enter newp1 and newp2 and newdistan:");
+        System.out.print("输入新路径的起始端和到达端及长度:");
         newP1 = scanner.nextInt();
         newp2 = scanner.nextInt();
         newDistan = scanner.nextInt();
