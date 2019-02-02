@@ -1,6 +1,6 @@
 package com.company;
 
-public class S_Node implements Comparable<S_Node>{
+public class S_Node implements Comparable<S_Node>{//景点结点
 
     public static final int OK = 1;
     public static final int ERROR = 0;
@@ -12,65 +12,18 @@ public class S_Node implements Comparable<S_Node>{
     public vex_Node near;
     public boolean isVisite;
     public int minDistan;
+    //public Integer prim_Link2Num;//最小生成路径
+    //public boolean isContained;//是否已经被最小生成树包含
 
     public S_Node(){
         near = vex_node;
         minDistan = Integer.MAX_VALUE;
+        //prim_Link2Num = null;
     }
 
     @Override
     public int compareTo(S_Node o) {
         return Integer.compare(minDistan,o.minDistan);
     }
-
-    //    public static int Addvex(S_Node s_node,int linkNum,int diatan){//增
-//        vex_Node vex = s_node.vex_node;
-//        while (vex!=null){//验证是否已存在
-//            if(vex.LinkNum==linkNum) return ERROR;
-//            vex = vex.Next;
-//        }
-//
-//        vex_Node newNode = new vex_Node();
-//        newNode.DisTan = diatan;
-//        newNode.LinkNum = linkNum;
-//
-//        //newNode.Next = null;
-//
-//        s_node.near = newNode;
-//        s_node.near = s_node.near.Next;
-//
-//        return OK;
-//    }
-
-    //对象置为null时，虚拟机视其为可回收
-
-//    public static int delete_vex(S_Node s_node,int linkTo){//删
-//        vex_Node vex = s_node.vex_node;
-//        if(vex==null) return ERROR;
-//        while (vex.Next!=null&&vex.Next.LinkNum!=linkTo){
-//            vex = vex.Next;
-//        }
-//        if(vex.Next==null) return ERROR;
-//        vex_Node deletenode = vex.Next;
-//        vex.Next = deletenode.Next;
-//        deletenode = null;
-//        return OK;
-//    }
-//
-//    public static int Change_vex(S_Node s_node,int linkTo,int linkToChange){
-//        vex_Node vex_node = s_node.vex_node;
-//        while (vex_node.Next!=null&&vex_node.Next.LinkNum!=linkTo){
-//            vex_node = vex_node.Next;
-//        }
-//        if(vex_node.Next==null) return ERROR;
-//        vex_node.Next.LinkNum = linkToChange;
-//        return OK;
-//    }
-
-
-
-//    public static vex_Node Find_vex(S_Node s_node,int ){
-//
-//    }
 
 }

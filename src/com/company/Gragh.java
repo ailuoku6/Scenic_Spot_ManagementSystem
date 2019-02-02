@@ -55,6 +55,8 @@ public class Gragh {
                 Addvex(Integer.parseInt(data[1]),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
             }
 
+            bufferedReader.close();
+
         }catch (FileNotFoundException e){
             e.printStackTrace();
             System.out.println("file not find");
@@ -66,6 +68,22 @@ public class Gragh {
 
         //读取完要输出邻接表
 
+        printAdj_list();
+
+    }
+
+    public void printAdj_list(){
+        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+        while (entrys.hasNext()){
+            S_Node s_node = entrys.next().getValue();
+            System.out.print(s_node.num+" ");
+            vex_Node vex_node = s_node.vex_node;
+            while (vex_node!=null){
+                System.out.print(" -> "+vex_node.LinkNum);
+                vex_node = vex_node.Next;
+            }
+            System.out.println();
+        }
     }
 
     public int Add_Node(int num,String name,String inTro){
@@ -101,11 +119,6 @@ public class Gragh {
         s_node.name = name;
         s_node.inTro = inTro;
         return OK;
-    }
-
-    public S_Node Find_node(int key){
-        if(!G.containsKey(key)) return null;
-        return G.get(key);
     }
 
     public void DFS_Init(int key){
@@ -404,6 +417,53 @@ public class Gragh {
     }
 
     public int Circuit_plan(){
+        S_Node s_node = G.entrySet().iterator().next().getValue();//取一个节点出来
+
+        Map<Integer,S_Node> Contained = new HashMap<>();
+        Map<Integer,S_Node> UnContained = new HashMap<>();
+
+
+        //1.如何判断剩余结点
+        //2.如何判断一条路径是否在集合中
+
+        Contained.put(s_node.num,s_node);
+
+        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+
+        while (entrys.hasNext()){
+            S_Node sNode = entrys.next().getValue();
+            if (sNode.num!=s_node.num) UnContained.put(sNode.num,sNode);
+        }
+
+        while (!UnContained.isEmpty()){
+            Iterator<Map.Entry<Integer,S_Node>> Container_entry = Contained.entrySet().iterator();
+            int Min = Integer.MAX_VALUE;
+            vex_Node ShortVex_node = new vex_Node();
+
+
+            while (Container_entry.hasNext()){//遍历Contained的所有路径
+                S_Node s_node1 = Container_entry.next().getValue();
+                vex_Node vex_node = s_node1.vex_node;
+                while (vex_node!=null){
+                    if (vex_node.DisTan<Min&&Contained.get(vex_node.LinkNum)==null){//如果当前路径小于最短的路径且该路径连接两个Map
+                        Min = vex_node.DisTan;
+                        ShortVex_node = vex_node;
+                    }
+                    vex_node = vex_node.Next;
+                }
+            }
+
+            if (Min==Integer.MAX_VALUE) break;//防止不是连通图造成的死循环
+
+            //遍历完后进行对两个集合的操作
+            ShortVex_node.isShort_path = true;//描黑路径
+
+            Contained.put(ShortVex_node.LinkNum,UnContained.remove(ShortVex_node.LinkNum));
+
+            //idea:记录下s_node1,在S_node结点新增一个队列,并把出边放入队列中
+
+        }
+
         return OK;
     }
 
