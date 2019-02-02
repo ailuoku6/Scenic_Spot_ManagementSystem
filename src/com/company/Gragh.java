@@ -470,8 +470,6 @@ public class Gragh {
 
             Contained.put(ShortVex_node.LinkNum,UnContained.remove(ShortVex_node.LinkNum));//把结点从UnContained移入Contained
 
-            //idea:记录下s_node1,在S_node结点新增一个队列,并把出边放入队列中
-
         }
 
         Iterator<Map.Entry<Integer,S_Node>> entrys_ = G.entrySet().iterator();

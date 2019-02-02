@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3c758178-b27e-4683-9c3e-ce84baffc26f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/com/company/Gragh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Gragh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/S_Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/S_Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/vex_Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/vex_Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,11 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1548">
-              <caret line="100" column="29" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+            <state relative-caret-position="312">
+              <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
               <folding>
                 <element signature="e#2892#2893#0" expanded="true" />
                 <element signature="e#2913#2914#0" expanded="true" />
@@ -117,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Gragh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="494" column="18" lean-forward="true" selection-start-line="494" selection-start-column="18" selection-end-line="494" selection-end-column="18" />
+            <state relative-caret-position="-813">
+              <caret line="418" column="30" lean-forward="true" selection-start-line="418" selection-start-column="30" selection-end-line="418" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -179,10 +178,10 @@
         <option value="$PROJECT_DIR$/src/com/company/Menu.java" />
         <option value="$PROJECT_DIR$/src/com/company/Path_list.java" />
         <option value="$PROJECT_DIR$/Edge.txt" />
-        <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/S_Node.java" />
         <option value="$PROJECT_DIR$/src/com/company/vex_Node.java" />
         <option value="$PROJECT_DIR$/src/com/company/Gragh.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Main.java" />
       </list>
     </option>
   </component>
@@ -284,12 +283,12 @@
       <workItem from="1548988407625" duration="6888000" />
       <workItem from="1549024752946" duration="3837000" />
       <workItem from="1549073499303" duration="1915000" />
-      <workItem from="1549075633044" duration="12816000" />
+      <workItem from="1549075633044" duration="13056000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89776000" />
+    <option name="totallyTimeSpent" value="90016000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1756" height="937" extended-state="0" />
@@ -415,17 +414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1548">
-          <caret line="100" column="29" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
-          <folding>
-            <element signature="e#2892#2893#0" expanded="true" />
-            <element signature="e#2913#2914#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
@@ -461,10 +449,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Gragh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="494" column="18" lean-forward="true" selection-start-line="494" selection-start-column="18" selection-end-line="494" selection-end-column="18" />
+        <state relative-caret-position="-813">
+          <caret line="418" column="30" lean-forward="true" selection-start-line="418" selection-start-column="30" selection-end-line="418" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
+          <folding>
+            <element signature="e#2892#2893#0" expanded="true" />
+            <element signature="e#2913#2914#0" expanded="true" />
           </folding>
         </state>
       </provider>
