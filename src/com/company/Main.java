@@ -98,7 +98,7 @@ public class Main {
     }
 
     public static void Circuit_planning(Gragh gragh,Scanner scanner){
-
+        gragh.Circuit_plan();
     }
 
     public static void Change_Gragh(Gragh gragh,Scanner scanner){

@@ -428,7 +428,7 @@ public class Gragh {
 
         Contained.put(s_node.num,s_node);
 
-        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
+        Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();//遍历所有结点
 
         while (entrys.hasNext()){
             S_Node sNode = entrys.next().getValue();
@@ -440,6 +440,8 @@ public class Gragh {
             int Min = Integer.MAX_VALUE;
             vex_Node ShortVex_node = new vex_Node();
 
+            S_Node Short_Snode = new S_Node();
+
 
             while (Container_entry.hasNext()){//遍历Contained的所有路径
                 S_Node s_node1 = Container_entry.next().getValue();
@@ -448,6 +450,7 @@ public class Gragh {
                     if (vex_node.DisTan<Min&&Contained.get(vex_node.LinkNum)==null){//如果当前路径小于最短的路径且该路径连接两个Map
                         Min = vex_node.DisTan;
                         ShortVex_node = vex_node;
+                        Short_Snode = s_node1;
                     }
                     vex_node = vex_node.Next;
                 }
@@ -457,6 +460,8 @@ public class Gragh {
 
             //遍历完后进行对两个集合的操作
             ShortVex_node.isShort_path = true;//描黑路径
+
+            Short_Snode.Prim_link.add(ShortVex_node.LinkNum);
 
             Contained.put(ShortVex_node.LinkNum,UnContained.remove(ShortVex_node.LinkNum));
 
