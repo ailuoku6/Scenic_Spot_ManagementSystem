@@ -417,7 +417,7 @@ public class Gragh {
     }
 
     public int Circuit_plan(){
-        S_Node s_node = G.entrySet().iterator().next().getValue();//取一个节点出来
+        //S_Node s_node = G.entrySet().iterator().next().getValue();//取一个节点出来
 
         Map<Integer,S_Node> Contained = new HashMap<>();
         Map<Integer,S_Node> UnContained = new HashMap<>();
@@ -426,14 +426,19 @@ public class Gragh {
         //1.如何判断剩余结点
         //2.如何判断一条路径是否在集合中
 
-        Contained.put(s_node.num,s_node);
+        //Contained.put(s_node.num,s_node);
 
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();//遍历所有结点
 
         while (entrys.hasNext()){
             S_Node sNode = entrys.next().getValue();
-            if (sNode.num!=s_node.num) UnContained.put(sNode.num,sNode);
+            //if (sNode.num!=s_node.num)
+            UnContained.put(sNode.num,sNode);
         }
+
+        Integer i = UnContained.entrySet().iterator().next().getKey();
+
+        Contained.put(i,UnContained.remove(i));//所有结点分为两个Map,一个Map存入已在最小生成树的结点,另一个存不在最小生成树中的结点
 
         while (!UnContained.isEmpty()){
             Iterator<Map.Entry<Integer,S_Node>> Container_entry = Contained.entrySet().iterator();
@@ -459,15 +464,33 @@ public class Gragh {
             if (Min==Integer.MAX_VALUE) break;//防止不是连通图造成的死循环
 
             //遍历完后进行对两个集合的操作
-            ShortVex_node.isShort_path = true;//描黑路径
+            ShortVex_node.isPrim_path = true;//描黑最小生成树的路径
 
-            Short_Snode.Prim_link.add(ShortVex_node.LinkNum);
+            //Short_Snode.Prim_link.add(ShortVex_node.LinkNum);
 
-            Contained.put(ShortVex_node.LinkNum,UnContained.remove(ShortVex_node.LinkNum));
+            Contained.put(ShortVex_node.LinkNum,UnContained.remove(ShortVex_node.LinkNum));//把结点从UnContained移入Contained
 
             //idea:记录下s_node1,在S_node结点新增一个队列,并把出边放入队列中
 
         }
+
+        Iterator<Map.Entry<Integer,S_Node>> entrys_ = G.entrySet().iterator();
+
+        int path_length = 0;
+
+        while (entrys_.hasNext()){
+            S_Node node = entrys_.next().getValue();
+            vex_Node vexNode = node.vex_node;
+            while (vexNode!=null){
+                if(vexNode.isPrim_path){
+                    path_length+=vexNode.DisTan;
+                    System.out.println(node.name+" -> "+G.get(vexNode.LinkNum).name+",长度为: "+vexNode.DisTan);
+                }
+                vexNode = vexNode.Next;
+            }
+        }
+
+        System.out.println("总长度为:"+path_length);
 
         return OK;
     }

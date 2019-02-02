@@ -5,12 +5,12 @@ public class vex_Node {//路径结点
     public int LinkNum;
     public vex_Node Next;
     public boolean isSave;//标记是否存入道路
-    public boolean isShort_path;//标记该路径是否是最小生成树的路径
+    public boolean isPrim_path;//标记该路径是否是最小生成树的路径
 
     public vex_Node(){
         Next = null;
         isSave = false;
-        isShort_path = false;
+        isPrim_path = false;
     }
 
 }
