@@ -1,10 +1,7 @@
 package com.company;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Gragh {
     public Map<Integer,S_Node> G;//地图存于map中
@@ -342,7 +339,7 @@ public class Gragh {
 
     public int Get_distan(int p1,int p2){
         S_Node s_node = G.get(p1);
-        if(s_node!=null){
+        if(s_node!=null&&G.get(p2)!=null){
             vex_Node vex_node = s_node.vex_node;
             while (vex_node!=null){
                 if(vex_node.LinkNum==p2) return vex_node.DisTan;
@@ -355,22 +352,58 @@ public class Gragh {
     public int Find_short_path(int p1,int p2){
         if(G.get(p1)==null||G.get(p2)==null) return ERROR;
 
-        Map<Integer,Integer> dis_known = new LinkedHashMap<>();//已知最短路径顶点集合
-        Map<Integer,Integer> Unknown = new LinkedHashMap<>();//未知最短路径顶点集合
-
-        dis_known.put(p1,0);
-
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
-
         while (entrys.hasNext()){
             Map.Entry<Integer,S_Node> entry = entrys.next();
-            if(entry.getKey()!=p1){
-                Unknown.put(entry.getKey(),Get_distan(p1,entry.getKey()));
+            entry.getValue().minDistan = Integer.MAX_VALUE;
+        }//遍历所有结点并初始化minDistan为MAX_VALUE
+
+        Map<Integer,LinkedList<Integer>> Path = new HashMap<>();
+        Path.put(p1,new LinkedList<>());
+
+        G.get(p1).minDistan = 0;
+
+        PriorityQueue<S_Node> queue = new PriorityQueue<>();
+        queue.add(G.get(p1));
+
+        while (!queue.isEmpty()){
+            S_Node u = queue.poll();
+            vex_Node vex_node = u.vex_node;
+            while (vex_node!=null){
+
+                int newDistan = G.get(u.num).minDistan+vex_node.DisTan;
+
+                if(G.get(vex_node.LinkNum).minDistan>newDistan){
+                    queue.remove(G.get(vex_node.LinkNum));
+
+                    G.get(vex_node.LinkNum).minDistan = newDistan;
+
+                    Path.put(vex_node.LinkNum,new LinkedList<>(Path.get(u.num)));
+
+                    Path.get(vex_node.LinkNum).add(u.num);
+
+                    queue.add(G.get(vex_node.LinkNum));
+
+                }
+
+                vex_node = vex_node.Next;
             }
         }
 
-        
+        System.out.println(G.get(p2).minDistan);
 
+        LinkedList<Integer> path = Path.get(p2);
+
+        for (int i:path) {
+            System.out.print(G.get(i).name+" -> ");
+        }
+
+        System.out.println(G.get(p2).name);
+
+        return OK;
+    }
+
+    public int Circuit_plan(){
         return OK;
     }
 

@@ -1,6 +1,6 @@
 package com.company;
 
-public class S_Node {
+public class S_Node implements Comparable<S_Node>{
 
     public static final int OK = 1;
     public static final int ERROR = 0;
@@ -11,12 +11,19 @@ public class S_Node {
     public vex_Node vex_node;
     public vex_Node near;
     public boolean isVisite;
+    public int minDistan;
 
     public S_Node(){
         near = vex_node;
+        minDistan = Integer.MAX_VALUE;
     }
 
-//    public static int Addvex(S_Node s_node,int linkNum,int diatan){//增
+    @Override
+    public int compareTo(S_Node o) {
+        return Integer.compare(minDistan,o.minDistan);
+    }
+
+    //    public static int Addvex(S_Node s_node,int linkNum,int diatan){//增
 //        vex_Node vex = s_node.vex_node;
 //        while (vex!=null){//验证是否已存在
 //            if(vex.LinkNum==linkNum) return ERROR;
