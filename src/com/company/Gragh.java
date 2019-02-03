@@ -16,10 +16,23 @@ public class Gragh {
     }
 
     public void Greate_gragh(String path1,String path2){//读取两个文件
-        try {//path1读取景点信息
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path1));
-            int count =Integer.parseInt(bufferedReader.readLine());
 
+        File file = new File(path1);
+
+        if (!file.exists()){
+            try {
+                file.createNewFile();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        try {//path1读取景点信息
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+
+            String num = bufferedReader.readLine();
+
+            int count = num==null?0:Integer.parseInt(num);
 
             for (int i = 0;i<count;i++){
                 S_Node s_node = new S_Node();
@@ -40,9 +53,19 @@ public class Gragh {
             System.out.println("file error");
         }
 
+        File file1 = new File(path2);
+
+        if (!file1.exists()){
+            try {
+                file1.createNewFile();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
 
         try {//path2读取路径信息
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path2));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file1));
 
             String str;
             String[] data;
@@ -121,7 +144,10 @@ public class Gragh {
         return OK;
     }
 
-    public void DFS_Init(int key){
+    public int DFS_Init(int key){
+
+        if (G.get(key)==null) return ERROR;
+
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
         while (entrys.hasNext()){
             Map.Entry<Integer,S_Node> entry = entrys.next();                    //
@@ -129,6 +155,8 @@ public class Gragh {
         }
 
         DFS(key);
+
+        return OK;
 
     }
 

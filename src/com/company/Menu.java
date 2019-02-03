@@ -2,7 +2,7 @@ package com.company;
 
 public class Menu {
     public static void ShowMenu(){
-        System.out.println("-----------------------------------------------------");
+        System.out.println("-------------------------主菜单----------------------");
         System.out.println("|                      A:读取地图                    |");
         System.out.println("|                      B:查询景点                    |");
         System.out.println("|                      C:景点导航                    |");
@@ -25,7 +25,7 @@ public class Menu {
         //重点注意顶点和边的关系，考虑边是否重复？顶点是否存在？……
         //完善程序的健壮性
         //两个顶点之间是否能有多条路径，应该可以
-        System.out.println("-----------------------------------------------------");
+        System.out.println("--------------------景点及路径管理--------------------");
         System.out.println("|                     A:增加景点                     |");
         System.out.println("|                     B:删除景点                     |");
         System.out.println("|                     C:修改景点                     |");
