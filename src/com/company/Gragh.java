@@ -475,7 +475,6 @@ public class Gragh {
 
         while (entrys.hasNext()){
             S_Node sNode = entrys.next().getValue();
-            //if (sNode.num!=s_node.num)
             UnContained.put(sNode.num,sNode);
         }
 

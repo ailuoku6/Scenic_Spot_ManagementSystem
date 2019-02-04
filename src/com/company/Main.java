@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,7 +19,9 @@ public class Main {
 
         char option;
 
-        Scanner scanner = new Scanner(System.in);
+        InputStream in = System.in;
+
+        Scanner scanner = new Scanner(in);
 
         boolean isRun = true;
 
@@ -31,19 +34,19 @@ public class Main {
                 case 'A':gragh.Greate_gragh(Filepath.scenic_path,Filepath.Road_path);
                     break;
                 case 'b'://查询景点
-                case 'B':Scenic_detail(gragh,scanner);
+                case 'B':Scenic_detail(gragh,in);
                     break;
                 case 'c'://景点导航,待完善
-                case 'C':Scenic_nav(gragh,scanner);
+                case 'C':Scenic_nav(gragh,in);
                     break;
                 case 'd'://搜索最短路径
-                case 'D':Shortest_Path(gragh,scanner);
+                case 'D':Shortest_Path(gragh,in);
                     break;
                 case 'e'://铺设电路规划
-                case 'E':Circuit_planning(gragh,scanner);
+                case 'E':Circuit_planning(gragh,in);
                     break;
                 case 'f'://修改图保存文件
-                case 'F':Change_Gragh(gragh,scanner);
+                case 'F':Change_Gragh(gragh,in);
                     break;
                 case 'g'://退出程序
                 case 'G':isRun = false;
@@ -61,7 +64,10 @@ public class Main {
     }
 
 
-    public static void Scenic_detail(Gragh gragh,Scanner sc){
+    public static void Scenic_detail(Gragh gragh,InputStream in){
+
+        Scanner sc = new Scanner(in);
+
         try {
             System.out.print("请输入景点编号:");
             if(gragh.S_node_Detail(sc.nextInt())==ERROR){
@@ -70,11 +76,13 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
-    public static void Scenic_nav(Gragh gragh,Scanner scanner){
+    public static void Scenic_nav(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
+
         try {
             System.out.print("请输入你所在的景点编号:");
             if (gragh.DFS_Init(scanner.nextInt())==ERROR) {
@@ -83,12 +91,13 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
 
     }
 
-    public static void Shortest_Path(Gragh gragh,Scanner scanner){
+    public static void Shortest_Path(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int p1,p2;
@@ -105,37 +114,39 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
-    public static void Circuit_planning(Gragh gragh,Scanner scanner){
+    public static void Circuit_planning(Gragh gragh,InputStream in){
         gragh.Circuit_plan();
     }
 
-    public static void Change_Gragh(Gragh gragh,Scanner scanner){
+    public static void Change_Gragh(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
+
         boolean isRun = true;
         while (isRun){
             Menu.ShowSubMenu();
             System.out.print("输入需要操作的选项:");
             switch (scanner.next().charAt(0)){
                 case 'a'://增加景点
-                case 'A':AddScenic(gragh,scanner);
+                case 'A':AddScenic(gragh,in);
                     break;
                 case 'b'://删除景点
-                case 'B':DeleteScenic(gragh,scanner);
+                case 'B':DeleteScenic(gragh,in);
                     break;
                 case 'c'://修改景点
-                case 'C':ChangeScenic(gragh,scanner);
+                case 'C':ChangeScenic(gragh,in);
                     break;
                 case 'd'://增加路径
-                case 'D':Addpath(gragh,scanner);
+                case 'D':Addpath(gragh,in);
                     break;
                 case 'e'://删除路径
-                case 'E':DeletePath(gragh,scanner);
+                case 'E':DeletePath(gragh,in);
                     break;
                 case 'f'://修改路径
-                case 'F':ChangePath(gragh,scanner);
+                case 'F':ChangePath(gragh,in);
                     break;
                 case 'g'://保存
                 case 'G':gragh.SaveData(Filepath.scenic_path,Filepath.Road_path);
@@ -155,7 +166,9 @@ public class Main {
 
 
 
-    public static void AddScenic(Gragh gragh,Scanner scanner){
+    public static void AddScenic(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int num;
@@ -179,11 +192,12 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
-    public static void DeleteScenic(Gragh gragh,Scanner scanner){
+    public static void DeleteScenic(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int num;
@@ -199,11 +213,12 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
-    public static void ChangeScenic(Gragh gragh,Scanner scanner){
+    public static void ChangeScenic(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int num;
@@ -225,11 +240,12 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
-    public static void Addpath(Gragh gragh,Scanner scanner){
+    public static void Addpath(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int point1,point2,distan;
@@ -249,12 +265,13 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
 
     }
 
-    public static void DeletePath(Gragh gragh,Scanner scanner){
+    public static void DeletePath(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int point1,point2;
@@ -271,11 +288,12 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
-    public static void ChangePath(Gragh gragh,Scanner scanner){
+    public static void ChangePath(Gragh gragh,InputStream in){
+
+        Scanner scanner = new Scanner(in);
 
         try {
             int Old_p1,Old_p2,newP1,newp2,newDistan;
@@ -298,7 +316,6 @@ public class Main {
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
-            return;
         }
     }
 
