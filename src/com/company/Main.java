@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -61,32 +62,50 @@ public class Main {
 
 
     public static void Scenic_detail(Gragh gragh,Scanner sc){
-        //Scanner sc = new Scanner(System.in);
-        System.out.print("请输入景点编号:");
-        if(gragh.S_node_Detail(sc.nextInt())==ERROR){
-            System.out.println("没有此景点!");
+        try {
+            System.out.print("请输入景点编号:");
+            if(gragh.S_node_Detail(sc.nextInt())==ERROR){
+                System.out.println("没有此景点!");
+            }
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
         }
-        //sc.close();
     }
 
     public static void Scenic_nav(Gragh gragh,Scanner scanner){
-        System.out.print("请输入你所在的景点编号:");
-        if (gragh.DFS_Init(scanner.nextInt())==ERROR) {
-            System.out.println("无此景点");
+        try {
+            System.out.print("请输入你所在的景点编号:");
+            if (gragh.DFS_Init(scanner.nextInt())==ERROR) {
+                System.out.println("无此景点");
+            }
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
         }
+
     }
 
     public static void Shortest_Path(Gragh gragh,Scanner scanner){
-        int p1,p2;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入你所在的景点编号:");
-        p1 = scanner.nextInt();
-        if (p1==-1) return;
-        System.out.print("输入目标景点编号:");
-        p2 = scanner.nextInt();
-        if (p2==-1) return;
-        if (gragh.Find_short_path(p1,p2)!=OK){
-            System.out.println("景点不存在!");
+
+        try {
+            int p1,p2;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入你所在的景点编号:");
+            p1 = scanner.nextInt();
+            if (p1==-1) return;
+            System.out.print("输入目标景点编号:");
+            p2 = scanner.nextInt();
+            if (p2==-1) return;
+            if (gragh.Find_short_path(p1,p2)!=OK){
+                System.out.println("景点不存在!");
+            }
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
         }
     }
 
@@ -137,108 +156,150 @@ public class Main {
 
 
     public static void AddScenic(Gragh gragh,Scanner scanner){
-        int num;
-        String name;
-        String inTro;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入要增加的景点编号:");
-        num = scanner.nextInt();
-        if (num==-1) return;
-        System.out.print("输入要增加的景点名称:");
-        name = scanner.next();
-        if (name.equals("-1")) return;
-        System.out.print("输入要增加的景点简介:");
-        inTro = scanner.next();
-        if (inTro.equals("-1")) return;
-        if(gragh.Add_Node(num,name,inTro)==OK){
-            System.out.println("增加完毕!");
-        }else {
-            System.out.println("该景点已存在!");
-        }
 
+        try {
+            int num;
+            String name;
+            String inTro;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入要增加的景点编号:");
+            num = scanner.nextInt();
+            if (num==-1) return;
+            System.out.print("输入要增加的景点名称:");
+            name = scanner.next();
+            if (name.equals("-1")) return;
+            System.out.print("输入要增加的景点简介:");
+            inTro = scanner.next();
+            if (inTro.equals("-1")) return;
+            if(gragh.Add_Node(num,name,inTro)==OK){
+                System.out.println("增加完毕!");
+            }else {
+                System.out.println("该景点已存在!");
+            }
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
+        }
     }
 
     public static void DeleteScenic(Gragh gragh,Scanner scanner){
-        int num;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入要删除的景点编号:");
-        num = scanner.nextInt();
-        if (num==-1) return;
-        if (gragh.Delete_node(num)==OK){
-            System.out.println("删除成功!");
-        }else {
-            System.out.println("无此景点!");
+
+        try {
+            int num;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入要删除的景点编号:");
+            num = scanner.nextInt();
+            if (num==-1) return;
+            if (gragh.Delete_node(num)==OK){
+                System.out.println("删除成功!");
+            }else {
+                System.out.println("无此景点!");
+            }
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
         }
     }
 
     public static void ChangeScenic(Gragh gragh,Scanner scanner){
-        int num;
-        String name;
-        String inTro;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入要修改的景点编号:");
-        num = scanner.nextInt();
-        if (num==-1) return;
-        System.out.print("输入要修改的景点名称:");
-        name = scanner.next();
-        if (name.equals("-1")) return;
-        System.out.print("输入要修改的景点简介:");
-        inTro = scanner.next();
-        if (inTro.equals("-1")) return;
-        if(gragh.Change_Node(num,name,inTro)==OK){
-            System.out.println("修改成功!");
-        }else System.out.println("无此景点!");
+
+        try {
+            int num;
+            String name;
+            String inTro;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入要修改的景点编号:");
+            num = scanner.nextInt();
+            if (num==-1) return;
+            System.out.print("输入要修改的景点名称:");
+            name = scanner.next();
+            if (name.equals("-1")) return;
+            System.out.print("输入要修改的景点简介:");
+            inTro = scanner.next();
+            if (inTro.equals("-1")) return;
+            if(gragh.Change_Node(num,name,inTro)==OK){
+                System.out.println("修改成功!");
+            }else System.out.println("无此景点!");
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
+        }
     }
 
     public static void Addpath(Gragh gragh,Scanner scanner){
-        int point1,point2,distan;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入要增加的路径的起始端:");
-        point1 = scanner.nextInt();
-        if (point1==-1) return;
-        System.out.print("输入要增加的路径的到达端:");
-        point2 = scanner.nextInt();
-        if (point2==-1) return;
-        System.out.print("输入要增加的路径的长度:");
-        distan = scanner.nextInt();
-        if (distan==-1) return;
-        if(gragh.Addvex(point1,point2,distan)==OK&&gragh.Addvex(point2,point1,distan)==OK){
-            System.out.println("添加路径成功!");
-        }else System.out.println("添加路径失败!");
+
+        try {
+            int point1,point2,distan;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入要增加的路径的起始端:");
+            point1 = scanner.nextInt();
+            if (point1==-1) return;
+            System.out.print("输入要增加的路径的到达端:");
+            point2 = scanner.nextInt();
+            if (point2==-1) return;
+            System.out.print("输入要增加的路径的长度:");
+            distan = scanner.nextInt();
+            if (distan==-1) return;
+            if(gragh.Addvex(point1,point2,distan)==OK&&gragh.Addvex(point2,point1,distan)==OK){
+                System.out.println("添加路径成功!");
+            }else System.out.println("添加路径失败!");
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
+        }
+
     }
 
     public static void DeletePath(Gragh gragh,Scanner scanner){
-        int point1,point2;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入要删除的路径的起始端:");
-        point1 = scanner.nextInt();
-        if (point1==-1) return;
-        System.out.print("输入要删除的路径的到达端:");
-        point2 = scanner.nextInt();
-        if (point2==-1) return;
-        if(gragh.delete_vex(point1,point2)==OK&&gragh.delete_vex(point2,point1)==OK){
-            System.out.println("删除路径成功!");
-        }else System.out.println("删除路径失败!");
+
+        try {
+            int point1,point2;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入要删除的路径的起始端:");
+            point1 = scanner.nextInt();
+            if (point1==-1) return;
+            System.out.print("输入要删除的路径的到达端:");
+            point2 = scanner.nextInt();
+            if (point2==-1) return;
+            if(gragh.delete_vex(point1,point2)==OK&&gragh.delete_vex(point2,point1)==OK){
+                System.out.println("删除路径成功!");
+            }else System.out.println("删除路径失败!");
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
+        }
     }
 
     public static void ChangePath(Gragh gragh,Scanner scanner){
-        int Old_p1,Old_p2,newP1,newp2,newDistan;
-        System.out.println("输入-1取消操作");
-        System.out.print("输入旧路径的起始端和到达端:");
-        Old_p1 = scanner.nextInt();
-        if (Old_p1==-1) return;
-        Old_p2 = scanner.nextInt();
-        if (Old_p2==-1) return;
-        System.out.print("输入新路径的起始端和到达端及长度:");
-        newP1 = scanner.nextInt();
-        if (newP1==-1) return;
-        newp2 = scanner.nextInt();
-        if (newp2==-1) return;
-        newDistan = scanner.nextInt();
-        if (newDistan==-1) return;
-        if(gragh.Change_vex(Old_p1,Old_p2,newP1,newp2,newDistan)==OK){
-            System.out.println("修改成功!");
-        }else System.out.println("修改失败!");
+
+        try {
+            int Old_p1,Old_p2,newP1,newp2,newDistan;
+            System.out.println("输入-1取消操作");
+            System.out.print("输入旧路径的起始端和到达端:");
+            Old_p1 = scanner.nextInt();
+            if (Old_p1==-1) return;
+            Old_p2 = scanner.nextInt();
+            if (Old_p2==-1) return;
+            System.out.print("输入新路径的起始端和到达端及长度:");
+            newP1 = scanner.nextInt();
+            if (newP1==-1) return;
+            newp2 = scanner.nextInt();
+            if (newp2==-1) return;
+            newDistan = scanner.nextInt();
+            if (newDistan==-1) return;
+            if(gragh.Change_vex(Old_p1,Old_p2,newP1,newp2,newDistan)==OK){
+                System.out.println("修改成功!");
+            }else System.out.println("修改失败!");
+        }catch (InputMismatchException e){
+            //e.printStackTrace();
+            Menu.ShowERROR();
+            return;
+        }
     }
 
 }

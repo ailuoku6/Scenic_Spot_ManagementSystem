@@ -291,34 +291,58 @@ public class Gragh {
     }
 
 
-    public int Addvex(int key,int linkNum,int diatan){//增
+    public int Addvex(int key,int linkNum,int diatan){//增,根据路径长短进行升序排列
+
+//        S_Node s_node = G.get(key);
+//
+//        if (s_node==null||G.get(linkNum)==null) return ERROR;//找不到对应结点
+//
+//        vex_Node newNode = new vex_Node();
+//        newNode.DisTan = diatan;
+//        newNode.LinkNum = linkNum;
+//
+//        if(s_node.vex_node==null) {
+//            s_node.vex_node = newNode;
+//            return OK;
+//        }
+//
+//        vex_Node vex = s_node.vex_node;
+//        while (vex.Next!=null){//验证路径是否已存在
+//            if(vex.LinkNum==linkNum) return ERROR;
+//            vex = vex.Next;
+//        }
+//
+//        if(vex.LinkNum==linkNum) return ERROR;//验证最后一个路径是否重复
+//
+//        vex.Next = newNode;
+//
+//        return OK;
 
         S_Node s_node = G.get(key);
+        vex_Node vex = s_node.vex_node;
 
         if (s_node==null||G.get(linkNum)==null) return ERROR;//找不到对应结点
 
         vex_Node newNode = new vex_Node();
         newNode.DisTan = diatan;
         newNode.LinkNum = linkNum;
-
-        if(s_node.vex_node==null) {
+        //该节点还没有任何路径||新路径的距离比第一个路径小
+        if (vex==null||vex.DisTan>diatan){
+            newNode.Next = vex;
             s_node.vex_node = newNode;
             return OK;
         }
 
-        vex_Node vex = s_node.vex_node;
+        if (vex.LinkNum==linkNum) return ERROR;
 
-//        while (vex!=null&&vex.Next!=null){//验证路径是否已存在
-//            if(vex.LinkNum==linkNum) return ERROR;
-//            vex = vex.Next;
-//        }
-        while (vex.Next!=null){//验证路径是否已存在
-            if(vex.LinkNum==linkNum) return ERROR;
+        while (vex.Next!=null){
+            if (vex.Next.DisTan>=diatan) break;
             vex = vex.Next;
         }
 
-        if(vex.LinkNum==linkNum) return ERROR;//验证最后一个路径是否重复
+        if (vex.Next!=null&&vex.Next.LinkNum==linkNum) return ERROR;
 
+        newNode.Next = vex.Next;
         vex.Next = newNode;
 
         return OK;
@@ -403,16 +427,18 @@ public class Gragh {
 
                 int newDistan = G.get(u.num).minDistan+vex_node.DisTan;
 
-                if(G.get(vex_node.LinkNum).minDistan>newDistan){
+                if(G.get(vex_node.LinkNum).minDistan>newDistan) {
                     queue.remove(G.get(vex_node.LinkNum));
 
                     G.get(vex_node.LinkNum).minDistan = newDistan;
 
-                    Path.put(vex_node.LinkNum,new LinkedList<>(Path.get(u.num)));
+                    Path.put(vex_node.LinkNum, new LinkedList<>(Path.get(u.num)));
 
                     Path.get(vex_node.LinkNum).add(u.num);
 
-                    queue.add(G.get(vex_node.LinkNum));
+                    //queue.add(G.get(vex_node.LinkNum));
+
+                    if (vex_node.LinkNum!=p2) queue.add(G.get(vex_node.LinkNum));
 
                 }
 
@@ -468,11 +494,12 @@ public class Gragh {
             while (Container_entry.hasNext()){//遍历Contained的所有路径
                 S_Node s_node1 = Container_entry.next().getValue();
                 vex_Node vex_node = s_node1.vex_node;
-                while (vex_node!=null){
+                while (vex_node!=null){//遍历每个景点的所有路径
                     if (vex_node.DisTan<Min&&Contained.get(vex_node.LinkNum)==null){//如果当前路径小于最短的路径且该路径连接两个Map
                         Min = vex_node.DisTan;
                         ShortVex_node = vex_node;
                         Short_Snode = s_node1;
+                        break;//不用往后找了，因为越靠前的路径的长度越小
                     }
                     vex_node = vex_node.Next;
                 }
@@ -482,8 +509,6 @@ public class Gragh {
 
             //遍历完后进行对两个集合的操作
             ShortVex_node.isPrim_path = true;//描黑最小生成树的路径
-
-            //Short_Snode.Prim_link.add(ShortVex_node.LinkNum);
 
             Contained.put(ShortVex_node.LinkNum,UnContained.remove(ShortVex_node.LinkNum));//把结点从UnContained移入Contained
 

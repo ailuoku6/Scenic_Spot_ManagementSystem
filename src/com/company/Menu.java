@@ -39,4 +39,8 @@ public class Menu {
 
     }
 
+    public static void ShowERROR(){
+        System.out.println("输入有误!");
+    }
+
 }
