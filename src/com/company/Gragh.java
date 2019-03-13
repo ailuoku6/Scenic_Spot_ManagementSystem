@@ -96,6 +96,9 @@ public class Gragh {
     }
 
     public void printAdj_list(){
+
+        System.out.println("地图的邻接表如下:");
+
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
         while (entrys.hasNext()){
             S_Node s_node = entrys.next().getValue();
