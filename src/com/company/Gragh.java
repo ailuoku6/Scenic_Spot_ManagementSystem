@@ -10,8 +10,11 @@ public class Gragh {
     public final int ERROR = 0;
     public final int INF = 999999999;
 
+    public Stack<Integer> BookStack;
+
     public Gragh(){
         G = new HashMap<>();
+        BookStack = new Stack<>();
         //book = new HashMap<>();
     }
 
@@ -149,6 +152,8 @@ public class Gragh {
 
     public int DFS_Init(int key){
 
+        BookStack.clear();
+
         if (G.get(key)==null) return ERROR;
 
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
@@ -164,17 +169,27 @@ public class Gragh {
     }
 
     public void DFS(int key){
+        BookStack.push(key);
         G.get(key).isVisite = true;
         vex_Node vex_node = G.get(key).vex_node;
-        System.out.println(G.get(key).num);
-        System.out.println(G.get(key).name);
-        System.out.println(G.get(key).inTro);
+        //System.out.println(G.get(key).num);
+        //System.out.print("->"+G.get(key).name);
+        //System.out.println(G.get(key).inTro);
         while (vex_node!=null){
             if(!(G.get(vex_node.LinkNum).isVisite)){
                 DFS(vex_node.LinkNum);
+                //G.get(vex_node.LinkNum).isVisite = false;
             }
             vex_node = vex_node.Next;
         }
+        if (BookStack.size()==G.size()){
+            for (Integer i:BookStack) {
+                System.out.print("->"+G.get(i).name);
+            }
+            System.out.println();
+        }
+        G.get(key).isVisite = false;
+        BookStack.pop();
     }
 
     public int S_node_Detail(int key){
