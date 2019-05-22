@@ -9,8 +9,6 @@ public class Main {
     public static final int OK = 1;
     public static final int ERROR = 0;
 
-    //增加一个取消操作的选项
-
     public static void main(String[] args) {
 
         Gragh gragh = new Gragh();
@@ -36,7 +34,7 @@ public class Main {
                 case 'b'://查询景点
                 case 'B':Scenic_detail(gragh,in);
                     break;
-                case 'c'://景点导航,待完善
+                case 'c'://景点导航
                 case 'C':Scenic_nav(gragh,in);
                     break;
                 case 'd'://搜索最短路径
@@ -149,7 +147,7 @@ public class Main {
                 case 'F':ChangePath(gragh,in);
                     break;
                 case 'g'://保存
-                case 'G':gragh.SaveData(Filepath.scenic_path,Filepath.Road_path);
+                case 'G':SaveGragh(gragh);//gragh.SaveData(Filepath.scenic_path,Filepath.Road_path);
                     break;
                 case 'h'://退出
                 case 'H':isRun = false;
@@ -178,6 +176,10 @@ public class Main {
             System.out.print("输入要增加的景点编号:");
             num = scanner.nextInt();
             if (num==-1) return;
+            if (gragh.G.get(num)!=null){
+                System.out.print("该景点已存在!");
+                return;
+            }
             System.out.print("输入要增加的景点名称:");
             name = scanner.next();
             if (name.equals("-1")) return;
@@ -186,9 +188,10 @@ public class Main {
             if (inTro.equals("-1")) return;
             if(gragh.Add_Node(num,name,inTro)==OK){
                 System.out.println("增加完毕!");
-            }else {
-                System.out.println("该景点已存在!");
             }
+//            else {
+//                System.out.println("该景点已存在!");
+//            }
         }catch (InputMismatchException e){
             //e.printStackTrace();
             Menu.ShowERROR();
@@ -317,6 +320,12 @@ public class Main {
             //e.printStackTrace();
             Menu.ShowERROR();
         }
+    }
+
+    public static void SaveGragh(Gragh gragh){
+        if (gragh.SaveData(Filepath.scenic_path,Filepath.Road_path)==OK){
+            System.out.println("保存成功!");
+        }else System.out.println("保存失败!");
     }
 
 }

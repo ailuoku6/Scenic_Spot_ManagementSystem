@@ -1,1 +1,0 @@
-# Scenic_Spot_ManagementSystem

@@ -10,11 +10,14 @@ public class Gragh {
     public final int ERROR = 0;
     public final int INF = 999999999;
 
-    public Stack<Integer> BookStack;
+    //public Stack<Integer> BookStack;
+
+    public MyStack BookStack;
 
     public Gragh(){
         G = new HashMap<>();
-        BookStack = new Stack<>();
+        BookStack = new MyStack();
+        //BookStack = new Stack<>();
         //book = new HashMap<>();
     }
 
@@ -43,7 +46,7 @@ public class Gragh {
                 s_node.name = bufferedReader.readLine();
                 s_node.inTro = bufferedReader.readLine();
                 s_node.vex_node = null;
-                s_node.near = null;
+                //s_node.near = null;
                 G.put(s_node.num,s_node);
             }
 
@@ -75,8 +78,6 @@ public class Gragh {
 
             while ((str = bufferedReader.readLine())!=null){
                 data = str.split(" ");
-//                S_Node.Addvex(G.get(Integer.parseInt(data[0])),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
-//                S_Node.Addvex(G.get(Integer.parseInt(data[1])),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
                 Addvex(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
                 Addvex(Integer.parseInt(data[1]),Integer.parseInt(data[0]),Integer.parseInt(data[2]));
             }
@@ -150,46 +151,46 @@ public class Gragh {
         return OK;
     }
 
-    public int DFS_Init(int key){
+    public int DFS_Init(int key){//key是起始景点编号
 
-        BookStack.clear();
+        BookStack.clear();//清空标记栈
 
-        if (G.get(key)==null) return ERROR;
+        if (G.get(key)==null) return ERROR;//如果没有这个景点，返回错误并退出，不进行后序操作
 
+        //遍历所有景点并把isVisite标记为false，表示没访问过
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
         while (entrys.hasNext()){
-            Map.Entry<Integer,S_Node> entry = entrys.next();                    //
+            Map.Entry<Integer,S_Node> entry = entrys.next();
             entry.getValue().isVisite = false;
         }
 
-        DFS(key);
+        DFS(key);//已完成初始化工作，开始进行深度优先搜索
 
         return OK;
 
     }
 
     public void DFS(int key){
-        BookStack.push(key);
-        G.get(key).isVisite = true;
-        vex_Node vex_node = G.get(key).vex_node;
-        //System.out.println(G.get(key).num);
-        //System.out.print("->"+G.get(key).name);
-        //System.out.println(G.get(key).inTro);
-        while (vex_node!=null){
-            if(!(G.get(vex_node.LinkNum).isVisite)){
-                DFS(vex_node.LinkNum);
-                //G.get(vex_node.LinkNum).isVisite = false;
+        BookStack.push(key);//访问该结点后，把该节点标号入栈
+        G.get(key).isVisite = true;//把isVisite标记为true，表示已访问
+        vex_Node vex_node = G.get(key).vex_node;//访问景点的道路
+        while (vex_node!=null){//当道路结点不为空时
+            if(!(G.get(vex_node.LinkNum).isVisite)){//道路指向的景点还没有被访问过
+                DFS(vex_node.LinkNum);//访问道路指向的景点
             }
-            vex_node = vex_node.Next;
+            vex_node = vex_node.Next;//看下一条路
         }
-        if (BookStack.size()==G.size()){
-            for (Integer i:BookStack) {
-                System.out.print("->"+G.get(i).name);
+        if (BookStack.size()==G.size()){//当栈的大小等于景点数量时，说明所有景点都访问到了
+            int size = BookStack.size();
+            //int[] array = BookStack.getArray();
+            //按入栈顺序输出所有景点
+            for (int i = 0;i<size;i++){
+                System.out.print("->"+G.get(BookStack.getItem(i)).name);
             }
             System.out.println();
         }
-        G.get(key).isVisite = false;
-        BookStack.pop();
+        G.get(key).isVisite = false;//访问结束，把isVisite标记为false，方便从另外道路进来访问
+        BookStack.pop();//把该节点标号出栈
     }
 
     public int S_node_Detail(int key){
@@ -266,7 +267,7 @@ public class Gragh {
         return OK;
     }
 
-    public int mark_Vex(int position1,int position2){//标注这里还得能恢复,方便下次保存
+    public int mark_Vex(int position1,int position2){
 
         vex_Node vex_node = G.get(position1).vex_node;
 
@@ -310,31 +311,6 @@ public class Gragh {
 
 
     public int Addvex(int key,int linkNum,int diatan){//增,根据路径长短进行升序排列
-
-//        S_Node s_node = G.get(key);
-//
-//        if (s_node==null||G.get(linkNum)==null) return ERROR;//找不到对应结点
-//
-//        vex_Node newNode = new vex_Node();
-//        newNode.DisTan = diatan;
-//        newNode.LinkNum = linkNum;
-//
-//        if(s_node.vex_node==null) {
-//            s_node.vex_node = newNode;
-//            return OK;
-//        }
-//
-//        vex_Node vex = s_node.vex_node;
-//        while (vex.Next!=null){//验证路径是否已存在
-//            if(vex.LinkNum==linkNum) return ERROR;
-//            vex = vex.Next;
-//        }
-//
-//        if(vex.LinkNum==linkNum) return ERROR;//验证最后一个路径是否重复
-//
-//        vex.Next = newNode;
-//
-//        return OK;
 
         S_Node s_node = G.get(key);
         vex_Node vex = s_node.vex_node;
@@ -421,7 +397,7 @@ public class Gragh {
         return INF;
     }
 
-    public int Find_short_path(int p1,int p2){
+    public int Find_short_path(int p1,int p2){//p1起始点,p2目的地
         if(G.get(p1)==null||G.get(p2)==null) return ERROR;
 
         Iterator<Map.Entry<Integer,S_Node>> entrys = G.entrySet().iterator();
@@ -430,33 +406,31 @@ public class Gragh {
             entry.getValue().minDistan = Integer.MAX_VALUE;
         }//遍历所有结点并初始化minDistan为MAX_VALUE
 
-        Map<Integer,LinkedList<Integer>> Path = new HashMap<>();
-        Path.put(p1,new LinkedList<>());
+        Map<Integer,LinkedList<Integer>> Path = new HashMap<>();//Path存储到索引景点的最短距离所要经过的景点的编号
+        Path.put(p1,new LinkedList<>());//把起始景点放入path中
 
-        G.get(p1).minDistan = 0;
+        G.get(p1).minDistan = 0;//起始点到自身最短距离为0
 
-        PriorityQueue<S_Node> queue = new PriorityQueue<>();
-        queue.add(G.get(p1));
+        PriorityQueue<S_Node> queue = new PriorityQueue<>();//用队列存储景点，根据minDisTan升序排列，小的先出队
+        queue.add(G.get(p1));//把起始点加进去
 
         while (!queue.isEmpty()){
-            S_Node u = queue.poll();
+            S_Node u = queue.poll();//把队列中minDisTan最小的出队
             vex_Node vex_node = u.vex_node;
-            while (vex_node!=null){
+            while (vex_node!=null){//遍历所有道路
 
-                int newDistan = G.get(u.num).minDistan+vex_node.DisTan;
+                int newDistan = u.minDistan+vex_node.DisTan;//到vex_node.LinkNum景点的距离是当前景点的距离加道路长度
 
-                if(G.get(vex_node.LinkNum).minDistan>newDistan) {
+                if(G.get(vex_node.LinkNum).minDistan>newDistan) {//如果到vex_node.LinkNum景点的距离小于旧的最短距离
+                    //去掉vex_node.LinkNum景点，目的是后面加入更新最短距离后的vex_node.LinkNum景点
                     queue.remove(G.get(vex_node.LinkNum));
+                    G.get(vex_node.LinkNum).minDistan = newDistan;//更新最短距离
 
-                    G.get(vex_node.LinkNum).minDistan = newDistan;
-
+                    //加入景点，其最短路径途经景点是u景点的最短路径途经景点加u景点
                     Path.put(vex_node.LinkNum, new LinkedList<>(Path.get(u.num)));
-
                     Path.get(vex_node.LinkNum).add(u.num);
 
-                    //queue.add(G.get(vex_node.LinkNum));
-
-                    if (vex_node.LinkNum!=p2) queue.add(G.get(vex_node.LinkNum));
+                    if (vex_node.LinkNum!=p2) queue.add(G.get(vex_node.LinkNum));//若还没到目的地，则把途经的景点加入队列
 
                 }
 
@@ -466,12 +440,12 @@ public class Gragh {
 
         System.out.println("最短距离为"+G.get(p2).minDistan);
 
-        LinkedList<Integer> path = Path.get(p2);
+        LinkedList<Integer> path = Path.get(p2);//获取 到目的地的途经景点
 
+        //输出所有途经景点和终点
         for (int i:path) {
             System.out.print(G.get(i).name+" -> ");
         }
-
         System.out.println(G.get(p2).name);
 
         return OK;
@@ -482,10 +456,6 @@ public class Gragh {
 
         Map<Integer,S_Node> Contained = new HashMap<>();
         Map<Integer,S_Node> UnContained = new HashMap<>();
-
-
-        //1.如何判断剩余结点
-        //2.如何判断一条路径是否在集合中
 
         //Contained.put(s_node.num,s_node);
 
